@@ -19,6 +19,7 @@ export default function HeroList() {
                 setSelectedHeros(updatedSelectedHeros);
             }
         }
+
     }
 
     if(selectedHeros.length === 2) {
@@ -67,7 +68,7 @@ export default function HeroList() {
             {modalIsOpen && (
                 <div className="">
                     <div>
-                        
+
                     </div>
                 </div>
             )}
