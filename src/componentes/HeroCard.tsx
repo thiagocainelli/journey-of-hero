@@ -11,9 +11,11 @@ type HeroCardProps = {
 export default function HeroCard({name, power, image, selected, handleClick}: HeroCardProps) {
     return (
         <div 
-            className={`flex flex-col items-center w-[250px] rounded-lg border-2 border-sky-800 gap-2 pb-3 cursor-pointer ${selected ? "border-3 border-green-500 scale-105" : ""}`}
+            className={`relative flex flex-col items-center w-[250px] rounded-lg border-[3px] border-sky-800 gap-2 pb-3 cursor-pointer ${selected ? "border-[5px] border-green-500 scale-105" : ""}`}
             onClick={handleClick}
         >
+            {selected && <div className="absolute top-0 bottom-0 w-full bg-white bg-opacity-30"></div>}
+            
             <img src={image} alt={name} className="rounded-t-lg" />
             <div className="flex flex-col items-center gap-1">
                 <h2 className="font-medium text-lg">{name}</h2>
