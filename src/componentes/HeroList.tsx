@@ -13,6 +13,7 @@ export default function HeroList() {
     const [heroData, setHeroData] = useState<Hero[]>([]);
     const [selectedHeros, setSelectedHeros] = useState<Hero[]>([]);
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleSelectHero = (hero: Hero) => {
         if (selectedHeros.length < 2) {
@@ -70,7 +71,6 @@ export default function HeroList() {
 
     const winner = determineWinner();
 
-
     useEffect(() => {
         if (selectedHeros.length === 2) {
             setModalIsOpen(true);
@@ -81,9 +81,10 @@ export default function HeroList() {
 
     const fetchHero = async () => {
         try {
+            setIsLoading(true);
             const response = await axios.get(`http://homologacao3.azapfy.com.br/api/ps/metahumans`);
             setHeroData(response.data);
-            console.log(response.data);
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
         }
@@ -106,6 +107,8 @@ export default function HeroList() {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchHero(e.target.value)}
                 />
             </div>
+
+            {isLoading && <p className="text-center text-xl">Carregando listagem de heróis...</p>}
 
             <div className="flex items-center justify-center flex-wrap gap-7">
                 {filteredHero && filteredHero.map(hero =>
